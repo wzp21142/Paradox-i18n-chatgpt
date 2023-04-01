@@ -1,7 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { Configuration, OpenAIApi } from 'openai'
-import { buildJsonByPairs, compressValuesInJson, groupPairs } from "./utils/utils.js";
-// import { buildJsonByPairs, compressValuesInJson, groupPairs } from '../lib/utils/index'
+import { extractYML } from "./utils/utils.js";
 
 function matchJSON (str: string) {
     let start = 0;
@@ -32,12 +31,8 @@ export default async function handler(request: VercelRequest, response: VercelRe
             apiKey: process.env.OPENAI_API_KEY,
         });
         const openai = new OpenAIApi(configuration);
-        const locale = JSON.parse(content);
-        const pairs: [string, any][] = []
-        compressValuesInJson(locale, '', pairs);
-
-        const { requireTranslation, noTranslation } = groupPairs(pairs)
-
+        const content1 = JSON.parse(content);
+        const { keys, values } = extractYML(content1);
         const completion = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
             messages: [
@@ -47,20 +42,18 @@ export default async function handler(request: VercelRequest, response: VercelRe
                 },
                 {
                     role: "user",
-                    content: JSON.stringify(requireTranslation.map(t => t[1]))
+                    content: JSON.stringify(values)
                 }
             ]
         });
         const translatedRaw = matchJSON(`${completion.data.choices[0].message?.content}`);
-        // const translatedRaw = matchJSON(`${JSON.stringify(requireTranslation)}`);
-
         const translated = JSON.parse(translatedRaw) as string[];
-
-        const nextPairs = (translated.map((t, i) => [requireTranslation[i][0], t]) as [string, string][]).concat(noTranslation);
-        const result = buildJsonByPairs(nextPairs);
+        
+        const result = keys.map((key, index) => key + " \"" + translated[index] + "\"");
+        console.log(result);
         response.status(200).json({
             success: true,
-            data: JSON.stringify(result)
+            data: result
         });
     } catch (error) {
         console.log(error)

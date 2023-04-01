@@ -2,7 +2,6 @@
 // content is a json string
 // estimate the word count in content and return the word count
 export function estimateTokenCount(content: any): number {
-    console.log(content)
     if (typeof content === 'string') {
         return content.split(' ').length;
     }
@@ -23,63 +22,32 @@ export function estimateTokenCount(content: any): number {
     return 1
 }
 
-export function compressValuesInJson (conentJson: any, path: string, pairs: [string, any][]) {
-    if (typeof conentJson === 'object') {
-        Object.keys(conentJson).forEach(k => {
-            let p = path
-            if (p.length !== 0) {
-                p += '.'
-            }
-            p += k;
-            if (typeof conentJson[k] !== 'object') {
-                pairs.push([p, conentJson[k]])
-            } else {
-                compressValuesInJson(conentJson[k], p, pairs)
-            }
-        })
-    } else {
-        pairs.push([path, conentJson])
+export function extractYML(text: string) {
+    const lines = text.split('\n');
+    const reg = /^l_\w+:$/;
+    if (reg.test(lines[0])){
+        lines.shift();
     }
-}
+    const keys = [];
+    const values = [];
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (line.length <= 5) {
+        continue;
+      }
+      const index = line.indexOf(" ");
+      const [key, value] = [line.slice(0, index), line.slice(index + 1)];
+      const trimmedKey = key.trim();
+      const trimmedValue = value.trim().slice(1, -1); 
+      
+      keys.push(trimmedKey);
+      values.push(trimmedValue);
+    }
+    
+    return { keys, values };
+  }
 
-/**
- * group pairs into two category, pairs need to be translated or not
- * @param pairs 
- */
-export function groupPairs (pairs: [string, any][]): {
-    requireTranslation: [string, string][],
-    noTranslation: [string, any][]
-} {
-    const requireTranslation: [string, string][] = [];
-    const noTranslation: [string, string][] = [];
-    for (let pair of pairs) {
-        if (typeof pair[1] === 'string') {
-            requireTranslation.push(pair)
-        } else {
-            noTranslation.push(pair)
-        }
-    }
-    return {
-        requireTranslation,
-        noTranslation
-    }
-}
+// export function optimizeResult(result: string) {
+//     "\"AI_political_stability:0s\\\"人工智能政治稳定性,dyn_c_imperial_federation:0s\\\"帝国联合,dyn_c_imperial_federation_adj:0s\\\"帝国\\\"\""
 
-export function buildJsonByPairs (pairs: [string, any][]) {
-    let ans: any = {};
-    for (let pair of pairs) {
-        const path = pair[0];
-        const keys = path.split('.');
-        let kIndex = 0;
-        let node = ans;
-        while (kIndex < keys.length - 1) {
-            if (typeof node[keys[kIndex]] === 'undefined') {
-                node[keys[kIndex]] = {} as any
-            }
-            node = node[keys[kIndex]]
-            kIndex++;
-        }
-        node[keys[kIndex]] = pair[1]
-    }
-    return ans;
-}
+// }
