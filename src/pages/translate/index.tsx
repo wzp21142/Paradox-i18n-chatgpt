@@ -51,6 +51,7 @@ const Translate: React.FC = (props) => {
             const compressedContent = compressJson(originalContent);
             const data = await translate(compressedContent, lang);
             setTransContent(prettierJson(data));
+            setTransContent(JSON.parse(transContent).join("\n"));
         } catch (error) {
             notify({
                 title: "translate service error",
@@ -59,6 +60,7 @@ const Translate: React.FC = (props) => {
             }, 3000)
         } finally {
             setLoading(false);
+            
         }
     }, [originalContent, lang]);
 
@@ -116,9 +118,6 @@ const Translate: React.FC = (props) => {
                             />
                         </div>
                         <MonacoEditor
-                            // onMount={(editor, m) => {
-                            //     resultEditorRef.current = editor;
-                            // }}
                             value={transContent}
                             height="600px"
                             language="json"

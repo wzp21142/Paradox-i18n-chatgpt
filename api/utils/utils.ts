@@ -1,3 +1,4 @@
+
 // this is an non-accurate way to estimate token numbers;
 // content is a json string
 // estimate the word count in content and return the word count
@@ -46,8 +47,3 @@ export function extractYML(text: string) {
     
     return { keys, values };
   }
-
-// export function optimizeResult(result: string) {
-//     "\"AI_political_stability:0s\\\"人工智能政治稳定性,dyn_c_imperial_federation:0s\\\"帝国联合,dyn_c_imperial_federation_adj:0s\\\"帝国\\\"\""
-
-// }

@@ -8,7 +8,7 @@ export function compressJson(content: string): string {
 
 export function prettierJson(content: string): string {
     try {
-        return JSON.stringify(content, null, 2)
+        return JSON.stringify(content, null, 1)
     } catch (error) {
         throw new Error('json is not valid')
     }
