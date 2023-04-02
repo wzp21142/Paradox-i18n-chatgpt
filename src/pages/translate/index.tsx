@@ -16,6 +16,7 @@ import { intlLanguages } from "./config";
 import { translate } from "./services";
 import Spinner from "../../components/spinner";
 import { useNotification } from "../../notify";
+import { initShimAsyncCodec } from "@zip.js/zip.js";
 
 self.MonacoEnvironment = {
     getWorker(_, label) {
@@ -50,8 +51,9 @@ const Translate: React.FC = (props) => {
         try {
             const compressedContent = compressJson(originalContent);
             const data = await translate(compressedContent, lang);
-            setTransContent(prettierJson(data));
-            setTransContent(JSON.parse(transContent).join("\n"));
+            const x=intlLanguages[1].value.toLowerCase();
+            const head=(x=='chinese' ? 'l_simp_chinese'+':\n':'l_'+x+':\n');
+            setTransContent(head+JSON.parse(prettierJson(data)).join("\n"));
         } catch (error) {
             notify({
                 title: "translate service error",

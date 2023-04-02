@@ -25,7 +25,7 @@ export function estimateTokenCount(content: any): number {
 
 export function extractYML(text: string) {
     const lines = text.split('\n');
-    const reg = /^l_\w+:$/;
+    const reg = /l_\w+:/;
     if (reg.test(lines[0])){
         lines.shift();
     }

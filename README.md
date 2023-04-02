@@ -1,17 +1,12 @@
-# chatgpt-i18n
+# chatgpt-i18n-paradox
 
-![](https://img.shields.io/github/actions/workflow/status/ObservedObserver/chatgpt-i18n/auto-build.yml)
-![](https://img.shields.io/github/license/observedobserver/chatgpt-i18n?color=black)
+![](https://img.shields.io/github/actions/workflow/status/ObservedObserver/chatgpt-i18n-paradox/auto-build.yml)
+![](https://img.shields.io/github/license/observedobserver/chatgpt-i18n-paradox?color=black)
 
-Translate your locale files with AI Assistance.
-
-Welcome to the ChatGPT + i18n app. This app is designed to help you translate your locale files with ease. Whether you are translating an application, website, or any other project that requires localization, it will make the process faster and more efficient.
-
-I build this app because I was tired of using Google Translate to translate my locale files. I wanted to use a more efficient and accurate translation tool. ChatGPT, however, always break my json and cannot translate large contents. So I build this app to solve these problems. Hope you enjoy it.
+Translate paradox-style yml locale files with AI Assistance, enjoy your mods and games with all text localized!
 
 ## Demo
 
-[Demo on Vercel](https://chatgpt-i18n.vercel.app/)
 
 translate
 
@@ -22,14 +17,6 @@ download multi locale files
 
 ![export-locale-files](https://user-images.githubusercontent.com/22167673/224073592-77bffd43-7422-40d2-984d-cfe95079ceb0.png)
 
-
-
-
-## Features
-- [x] Traslate your locale files with better experience.
-- [x] A web editor for better editing and viewing experience.
-- [x] Export multiple locale files at once.
-- [x] Seperate large json file into small chunks to avoid ChatGPT breaking json. (WIP: the service seems slow now, and sometimes break the limit of vercel FaaS, I am working on it.) 
 
 ## Deploy
 
@@ -50,13 +37,9 @@ Step 3. Build App
 # forntend
 npm run build
 # backend
-npm run server:build
-```
-
-## Development
-
-```bash
 npm run server
-# vercel dev (this contains both frontend and backend)
-# localhost:3000
 ```
+
+## Usage
+
+Open .yml files in the localization folders and copy the content into translator, wait and replace the file content with output.
