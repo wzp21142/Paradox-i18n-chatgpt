@@ -11,7 +11,7 @@ This repo is based on [chatgpt-i18n](https://github.com/ObservedObserver/chatgpt
 
 translate
 
-![chatgpt-i18n demo](https://user-images.githubusercontent.com/22167673/224185217-a32406fd-740c-4ced-b86c-55b2b895dc12.png)
+![chatgpt-i18n demo](https://p.sda1.dev/10/18cc88d581200854eb427541bd7c0b08/image.png)
 
 
 download multi locale files
