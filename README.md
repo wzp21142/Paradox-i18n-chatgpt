@@ -1,11 +1,11 @@
 # chatgpt-i18n-paradox
 
-![](https://img.shields.io/github/actions/workflow/status/wzp21142/chatgpt-i18n-paradox/auto-build.yml)
-![](https://img.shields.io/github/license/wzp21142/chatgpt-i18n-paradox?color=black)
+![](https://img.shields.io/github/actions/workflow/status/wzp21142/Paradox-i18n-chatgpt/auto-build.yml)
+![](https://img.shields.io/github/license/wzp21142/Paradox-i18n-chatgpt?color=black)
 
 Translate paradox-style yml locale files with AI Assistance, enjoy your mods and games with all text localized!
 
-This repo is based on [chatgpt-i18n](https://github.com/ObservedObserver/chatgpt-i18n/). Thanks ObservedObserver!
+This repo is based on [chatgpt-i18n](https://github.com/ObservedObserver/chatgpt-i18n/). Thanks to ObservedObserver!
 ## Demo
 
 

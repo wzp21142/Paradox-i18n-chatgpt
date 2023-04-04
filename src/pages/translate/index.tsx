@@ -51,9 +51,12 @@ const Translate: React.FC = (props) => {
         try {
             const compressedContent = compressJson(originalContent);
             const data = await translate(compressedContent, lang);
-            const x=intlLanguages[1].value.toLowerCase();
+            console.log(data);
+            const x=lang.toLowerCase();
             const head=(x=='chinese' ? 'l_simp_chinese'+':\n':'l_'+x+':\n');
-            setTransContent(head+JSON.parse(prettierJson(data)).join("\n"));
+            const t=JSON.parse(prettierJson(data));
+            t.forEach((item:any,index:any)=>{t[index]=' '+t[index]});
+            setTransContent(head+t.join("\n"));
         } catch (error) {
             notify({
                 title: "translate service error",

@@ -1,8 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { Configuration, OpenAIApi } from 'openai'
 import { extractYML } from "./utils/utils.js";
-import * as dotenv from 'dotenv';
-dotenv.config();
 function matchJSON (str: string) {
     let start = 0;
     let end = 0;
@@ -39,7 +37,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
             messages: [
                 {
                     role: "system",
-                    content: `You are a great translate bot. Translate a i18n locale array content to ${targetLang}. It's a array structure, contains many strings, translate each of them and make a new array of translated strings. Consider all the string as a context to make better translation. Do not translate the text within the square brackets [].\n`,
+                    content: `You are a great translate bot. Translate a i18n locale array content to ${targetLang}. It's a array structure, contains many strings, translate each of them and make a new array of translated strings. Consider all the string as a context to make better translation. Do not translate the text within the square brackets[] and dollars$$.\n`,
                 },
                 {
                     role: "user",
